@@ -1,8 +1,32 @@
-# SafeArt - AI Poster Compliance System
+<div align="center">
 
-A serverless system for automatically discovering, analyzing, and monitoring poster compliance across streaming platforms using AI-powered compliance checks.
+# 🎨 SafeArt  
+### **AI-Powered Poster Compliance System for Streaming Platforms**
 
-## Architecture Overview
+A fully serverless, cloud-native system that **discovers**, **analyzes**, and **monitors** poster compliance across streaming platforms using AI and automated crawling.
+
+Built with **AWS**, **Nova Act**, and **TypeScript** for reliability, scalability, and high throughput.
+
+</div>
+
+---
+
+## 🚀 What is SafeArt?
+
+SafeArt is an end-to-end automated pipeline that:
+
+- Crawls posters from streaming platforms (Netflix, Prime Video, etc.)  
+- Ingests them into a scalable AWS pipeline  
+- Runs AI-driven compliance checks  
+- Monitors and stores results for downstream analytics  
+
+It is designed as a **production-grade microservice**, capable of handling **10K+ jobs/hour**, with idempotency, retries, DLQs, and event-driven processing — ideal for compliance automation at scale.
+
+---
+
+## 🏗️ High-Level Architecture
+
+
 
 ```
 ┌─────────────┐
@@ -37,33 +61,66 @@ A serverless system for automatically discovering, analyzing, and monitoring pos
 └─────────────────────────────────┘
 ```
 
-## Core Components
 
-### 1. Crawler Service
-- Uses Nova Act for browser automation
-- Discovers posters from streaming platforms
-- Extracts structured metadata
-- Triggers job creation
+---
 
-### 2. Backend Service
-- **Job Creator**: Handles poster ingestion, S3 upload, DynamoDB writes, SQS messaging
-- **Worker Lambda**: Processes compliance checks, updates job status
-- **Infrastructure**: DynamoDB, S3, SQS, Lambda, EventBridge
+## 🔧 Core Components
 
-### 3. Shared Module
-- Data models (Job schema, compliance results)
-- Utilities (hashing, validation)
-- Type definitions
+### **1. Crawler Service**
+- Uses **Nova Act** for browser automation  
+- Discovers posters & extracts metadata  
+- Sends ingestion jobs to backend  
 
-## Tech Stack
+---
 
-- **Runtime**: Node.js 18+ / TypeScript
-- **Infrastructure**: AWS CDK (TypeScript)
-- **Storage**: DynamoDB (jobs), S3 (poster images)
-- **Messaging**: SQS (job queue)
-- **Compute**: AWS Lambda
-- **Crawling**: Nova Act (browser automation)
-- **Scheduling**: EventBridge
+### **2. Backend Service**
+
+#### **Job Creator Lambda**
+- Downloads poster images  
+- Uploads to S3  
+- Writes metadata to DynamoDB  
+- Pushes messages to SQS  
+- Fully **idempotent**, ensures **no duplicate processing**
+
+#### **Worker Lambda**
+- Listens to SQS  
+- Fetches posters from S3  
+- Runs AI compliance checks  
+- Updates job state in DynamoDB  
+
+#### **Infrastructure**
+- **S3** — poster storage  
+- **DynamoDB** — job state storage  
+- **SQS** — async job queue  
+- **EventBridge** — scheduling (future recurring scans)  
+
+---
+
+### **3. Shared Module**
+- Centralized TypeScript models  
+- Hashing, validation utilities  
+- Compliance schema definitions  
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Technology |
+|---------|------------|
+| Runtime | Node.js 18+, TypeScript |
+| Infra as Code | AWS CDK (TypeScript) |
+| Storage | DynamoDB + S3 |
+| Messaging | SQS (with DLQ) |
+| Compute | AWS Lambda |
+| Crawling | Nova Act |
+| Scheduling | EventBridge |
+| Local Testing | LocalStack |
+
+---
+
+## 📦 Project Structure
+
+
 
 ## Project Structure
 
