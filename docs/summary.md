@@ -1,6 +1,6 @@
-# Safeart Project Summary
+# SafeArt Project Summary
 
-## What is Safeart?
+## What is SafeArt?
 
 Safeart is a serverless system for automatically discovering, analyzing, and monitoring poster compliance across streaming platforms (Netflix, Prime Video, Disney+, etc.).
 

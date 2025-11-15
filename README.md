@@ -1,6 +1,6 @@
-# Safeart - Poster Compliance Checking System
+# SafeArt - AI Poster Compliance System
 
-A serverless system for automatically discovering, analyzing, and monitoring poster compliance across streaming platforms.
+A serverless system for automatically discovering, analyzing, and monitoring poster compliance across streaming platforms using AI-powered compliance checks.
 
 ## Architecture Overview
 

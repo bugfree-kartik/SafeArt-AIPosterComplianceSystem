@@ -1,7 +1,7 @@
 {
   "name": "safeart",
   "version": "0.1.0",
-  "description": "Poster compliance checking system",
+  "description": "SafeArt - AI Poster Compliance System",
   "private": true,
   "workspaces": [
     "packages/*"
