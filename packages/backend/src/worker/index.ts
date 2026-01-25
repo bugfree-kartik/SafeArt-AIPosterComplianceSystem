@@ -2,7 +2,8 @@ import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { SQSEvent, SQSRecord } from 'aws-lambda';
-import { Job, JobStatus, JobMessage } from '@safeart/shared';
+import { Job, JobStatus, JobMessage, ComplianceResult } from '@safeart/shared';
+import { checkCompliance as runComplianceCheck, ComplianceEngineConfig } from '../compliance';
 
 // Configure AWS clients to use LocalStack endpoint if provided
 const awsConfig: {
@@ -131,22 +132,25 @@ async function downloadFromS3(bucket: string, key: string): Promise<Buffer> {
 }
 
 /**
- * Placeholder compliance check
- * TODO: Replace with actual model integration in Phase 5
+ * Run compliance check using the compliance engine
+ * Uses AWS Rekognition in production, mock in local/test environments
  */
-async function checkCompliance(imageBuffer: Buffer): Promise<Job['result']> {
-  // Placeholder implementation
-  // In Phase 5, this will call actual vision models
+async function checkCompliance(imageBuffer: Buffer): Promise<ComplianceResult> {
+  // Configuration can be overridden via environment variables
+  const config: Partial<ComplianceEngineConfig> = {};
   
-  // Simulate processing delay
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
-  return {
-    isCompliant: true,
-    violations: [],
-    processedAt: new Date().toISOString(),
-    modelVersion: 'placeholder-v1',
-  };
+  // Allow explicit provider override
+  if (process.env.COMPLIANCE_PROVIDER) {
+    config.provider = process.env.COMPLIANCE_PROVIDER as ComplianceEngineConfig['provider'];
+  }
+  
+  // Allow explicit policy override
+  if (process.env.COMPLIANCE_POLICY) {
+    config.policy = process.env.COMPLIANCE_POLICY as 'default' | 'strict';
+  }
+  
+  console.log('Running compliance check with config:', config);
+  return runComplianceCheck(imageBuffer, config);
 }
 
 /**

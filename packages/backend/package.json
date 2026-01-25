@@ -13,22 +13,29 @@
     "test:local:worker": "node dist/test/worker-test.js",
     "test:e2e": "node dist/test/e2e-test.js",
     "test:dlq": "node dist/test/dlq-test.js",
-    "test:integration": "node dist/test/integration-test.js"
+    "test:integration": "node dist/test/integration-test.js",
+    "test:compliance": "node dist/test/compliance-test.js",
+    "test:scheduler": "node dist/test/scheduler-test.js",
+    "test:observability": "node dist/test/observability-test.js",
+    "test:all": "npm run test:compliance && npm run test:e2e && npm run test:dlq && npm run test:integration && npm run test:scheduler && npm run test:observability"
   },
   "dependencies": {
-    "@safeart/shared": "*",
+    "@aws-sdk/client-cloudwatch": "^3.490.0",
     "@aws-sdk/client-dynamodb": "^3.490.0",
+    "@aws-sdk/client-rekognition": "^3.975.0",
     "@aws-sdk/client-s3": "^3.490.0",
     "@aws-sdk/client-sqs": "^3.490.0",
     "@aws-sdk/lib-dynamodb": "^3.490.0",
     "@aws-sdk/s3-request-presigner": "^3.490.0",
-    "@types/aws-lambda": "^8.10.130"
+    "@safeart/shared": "*",
+    "@types/aws-lambda": "^8.10.130",
+    "aws-xray-sdk-core": "^3.5.3"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.0",
     "@types/uuid": "^9.0.6",
-    "typescript": "^5.3.3",
     "jest": "^29.7.0",
-    "@types/jest": "^29.5.11"
+    "typescript": "^5.3.3"
   }
 }

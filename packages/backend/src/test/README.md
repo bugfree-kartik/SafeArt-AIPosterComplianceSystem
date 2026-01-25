@@ -86,13 +86,27 @@ Tests cache, idempotency, and consistency:
 npm run test:integration
 ```
 
-### 4. Run All Tests
+### 4. Compliance Engine Tests (Phase 5 Validation)
+
+Tests AI compliance checking:
+- Mock provider functionality
+- Always-compliant/non-compliant providers
+- Deterministic results for same images
+- Policy configuration (default vs strict)
+- Rekognition initialization
+- Real image analysis with mock
+
+```bash
+npm run test:compliance
+```
+
+### 5. Run All Tests
 
 ```bash
 npm run test:all
 ```
 
-### 4. Individual Component Tests
+### 6. Individual Component Tests
 
 **Job Creator Test** - Tests job creation flow:
 ```bash
@@ -139,6 +153,7 @@ npm run test:local:worker <jobId> <s3Key> <posterHash>
 | E2E Test | Job creation, retrieval, SQS, worker processing, caching |
 | DLQ Test | Error handling, status transitions, malformed messages |
 | Integration Test | Cache hits, idempotency, consistency, rapid requests |
+| Compliance Test | AI models, policy rules, providers, severity ordering |
 
 ## Expected Output
 

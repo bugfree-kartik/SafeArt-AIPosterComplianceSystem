@@ -18,7 +18,9 @@
     "test:dlq": "cd packages/backend && node dist/test/dlq-test.js",
     "test:integration": "cd packages/backend && node dist/test/integration-test.js",
     "test:crawler": "cd packages/crawler && node dist/test/crawler-test.js",
-    "test:all": "npm run build && npm run test:e2e && npm run test:dlq && npm run test:integration",
+    "test:scheduler": "cd packages/backend && node dist/test/scheduler-test.js",
+    "test:observability": "cd packages/backend && node dist/test/observability-test.js",
+    "test:all": "npm run build && npm run test:e2e && npm run test:dlq && npm run test:integration && npm run test:scheduler && npm run test:observability",
     "crawler:demo": "cd packages/crawler && USE_DEMO=true node dist/index.js",
     "crawler:run": "cd packages/crawler && node dist/index.js",
     "local:setup": "bash scripts/setup-localstack.sh"
