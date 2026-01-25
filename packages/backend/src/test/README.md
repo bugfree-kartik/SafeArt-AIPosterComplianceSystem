@@ -72,7 +72,21 @@ Tests error scenarios and DLQ functionality:
 npm run test:dlq
 ```
 
-### 3. Run All Tests
+### 3. Integration Tests (Phase 2 Validation)
+
+Tests cache, idempotency, and consistency:
+- Cache hit after job processing
+- Different images don't cache hit
+- Same image across platforms
+- Idempotency with requestId
+- Rapid repeated requests handling
+- Job status consistency
+
+```bash
+npm run test:integration
+```
+
+### 4. Run All Tests
 
 ```bash
 npm run test:all
@@ -124,6 +138,7 @@ npm run test:local:worker <jobId> <s3Key> <posterHash>
 |------------|----------|
 | E2E Test | Job creation, retrieval, SQS, worker processing, caching |
 | DLQ Test | Error handling, status transitions, malformed messages |
+| Integration Test | Cache hits, idempotency, consistency, rapid requests |
 
 ## Expected Output
 

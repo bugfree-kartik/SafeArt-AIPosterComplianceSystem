@@ -16,7 +16,8 @@
     "test:local:worker": "cd packages/backend && node dist/test/worker-test.js",
     "test:e2e": "cd packages/backend && node dist/test/e2e-test.js",
     "test:dlq": "cd packages/backend && node dist/test/dlq-test.js",
-    "test:all": "npm run build && npm run test:e2e && npm run test:dlq",
+    "test:integration": "cd packages/backend && node dist/test/integration-test.js",
+    "test:all": "npm run build && npm run test:e2e && npm run test:dlq && npm run test:integration",
     "local:setup": "bash scripts/setup-localstack.sh"
   },
   "devDependencies": {
