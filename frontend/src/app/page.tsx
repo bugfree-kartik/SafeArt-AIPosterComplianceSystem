@@ -51,7 +51,7 @@ const DEMO_JOBS: Job[] = [
   {
     jobId: 'b533a6429e870439b3f87d0d9b1f47e0',
     status: 'COMPLETED',
-    platform: 'NETFLIX',
+    platform: 'PRIME_VIDEO',
     title: 'Love in Paris',
     posterUrl: 'https://picsum.photos/seed/safeart-love/300/450',
     isCompliant: true,
@@ -68,7 +68,7 @@ const DEMO_JOBS: Job[] = [
     posterUrl: 'https://picsum.photos/seed/safeart-space/300/450',
     isCompliant: false,
     violations: [
-      { code: 'VIOLENCE', severity: 'MEDIUM', message: 'Mild violence detected', confidence: 0.72 }
+      { code: 'VIOLENCE', severity: 'MEDIUM', message: 'Mild violence detected in space battle scenes', confidence: 0.72 }
     ],
     createdAt: '2026-01-25T18:27:12Z',
     completedAt: '2026-01-25T18:27:15Z',
@@ -77,7 +77,7 @@ const DEMO_JOBS: Job[] = [
   {
     jobId: '998d6a09cf85d95646a17ee723c40fd5',
     status: 'COMPLETED',
-    platform: 'NETFLIX',
+    platform: 'DISNEY_PLUS',
     title: 'The Last Stand',
     posterUrl: 'https://picsum.photos/seed/safeart-stand/300/450',
     isCompliant: true,
@@ -101,13 +101,13 @@ const DEMO_JOBS: Job[] = [
   {
     jobId: 'c1e17b6e26d61ccb90cbc8e227a8831c',
     status: 'COMPLETED',
-    platform: 'NETFLIX',
+    platform: 'HBO_MAX',
     title: 'Horror House',
     posterUrl: 'https://picsum.photos/seed/safeart-horror/300/450',
     isCompliant: false,
     violations: [
-      { code: 'VIOLENCE', severity: 'HIGH', message: 'Graphic violence detected', confidence: 0.85 },
-      { code: 'INAPPROPRIATE_CONTENT', severity: 'MEDIUM', message: 'Disturbing imagery', confidence: 0.67 }
+      { code: 'VIOLENCE', severity: 'HIGH', message: 'Graphic violence and gore detected', confidence: 0.85 },
+      { code: 'INAPPROPRIATE_CONTENT', severity: 'MEDIUM', message: 'Disturbing horror imagery', confidence: 0.67 }
     ],
     createdAt: '2026-01-25T18:27:14Z',
     completedAt: '2026-01-25T18:27:18Z',
@@ -128,7 +128,7 @@ const DEMO_JOBS: Job[] = [
   {
     jobId: '61d5eaab9b75c1f7e8bd12b0a9eac8eb',
     status: 'COMPLETED',
-    platform: 'NETFLIX',
+    platform: 'DISNEY_PLUS',
     title: 'Animated Dreams',
     posterUrl: 'https://picsum.photos/seed/safeart-animated/300/450',
     isCompliant: true,
@@ -141,15 +141,152 @@ const DEMO_JOBS: Job[] = [
     jobId: '03d58f8017982d86a3525fb9ea5dffaf',
     status: 'COMPLETED',
     platform: 'NETFLIX',
-    title: 'Crime Scene',
+    title: 'Crime Scene Investigation',
     posterUrl: 'https://picsum.photos/seed/safeart-crime/300/450',
     isCompliant: false,
     violations: [
-      { code: 'WEAPONS', severity: 'LOW', message: 'Weapon visible', confidence: 0.58 }
+      { code: 'WEAPONS', severity: 'MEDIUM', message: 'Firearms prominently displayed', confidence: 0.78 },
+      { code: 'VIOLENCE', severity: 'LOW', message: 'Crime scene imagery', confidence: 0.52 }
     ],
     createdAt: '2026-01-25T18:27:16Z',
     completedAt: '2026-01-25T18:27:21Z',
     processingDurationMs: 167,
+  },
+  {
+    jobId: 'a1b2c3d4e5f6g7h8i9j0k1l2',
+    status: 'COMPLETED',
+    platform: 'PRIME_VIDEO',
+    title: 'Dark Underworld',
+    posterUrl: 'https://picsum.photos/seed/safeart-dark/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'DRUGS_ALCOHOL', severity: 'HIGH', message: 'Drug paraphernalia visible', confidence: 0.89 },
+      { code: 'VIOLENCE', severity: 'MEDIUM', message: 'Gang violence imagery', confidence: 0.71 }
+    ],
+    createdAt: '2026-01-25T18:28:10Z',
+    completedAt: '2026-01-25T18:28:15Z',
+    processingDurationMs: 234,
+  },
+  {
+    jobId: 'b2c3d4e5f6g7h8i9j0k1l2m3',
+    status: 'COMPLETED',
+    platform: 'HBO_MAX',
+    title: 'Midnight Thriller',
+    posterUrl: 'https://picsum.photos/seed/safeart-midnight/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'NUDITY', severity: 'MEDIUM', message: 'Suggestive content detected', confidence: 0.64 }
+    ],
+    createdAt: '2026-01-25T18:28:11Z',
+    completedAt: '2026-01-25T18:28:16Z',
+    processingDurationMs: 189,
+  },
+  {
+    jobId: 'c3d4e5f6g7h8i9j0k1l2m3n4',
+    status: 'COMPLETED',
+    platform: 'NETFLIX',
+    title: 'Family Fun Time',
+    posterUrl: 'https://picsum.photos/seed/safeart-family/300/450',
+    isCompliant: true,
+    violations: [],
+    createdAt: '2026-01-25T18:28:12Z',
+    completedAt: '2026-01-25T18:28:17Z',
+    processingDurationMs: 78,
+  },
+  {
+    jobId: 'd4e5f6g7h8i9j0k1l2m3n4o5',
+    status: 'COMPLETED',
+    platform: 'APPLE_TV',
+    title: 'War Chronicles',
+    posterUrl: 'https://picsum.photos/seed/safeart-war/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'VIOLENCE', severity: 'CRITICAL', message: 'Extreme warfare violence', confidence: 0.94 },
+      { code: 'WEAPONS', severity: 'HIGH', message: 'Military weapons prominently featured', confidence: 0.91 },
+      { code: 'INAPPROPRIATE_CONTENT', severity: 'HIGH', message: 'Graphic war imagery', confidence: 0.82 }
+    ],
+    createdAt: '2026-01-25T18:28:13Z',
+    completedAt: '2026-01-25T18:28:20Z',
+    processingDurationMs: 312,
+  },
+  {
+    jobId: 'e5f6g7h8i9j0k1l2m3n4o5p6',
+    status: 'COMPLETED',
+    platform: 'DISNEY_PLUS',
+    title: 'Magical Kingdom',
+    posterUrl: 'https://picsum.photos/seed/safeart-magic/300/450',
+    isCompliant: true,
+    violations: [],
+    createdAt: '2026-01-25T18:28:14Z',
+    completedAt: '2026-01-25T18:28:18Z',
+    processingDurationMs: 92,
+  },
+  {
+    jobId: 'f6g7h8i9j0k1l2m3n4o5p6q7',
+    status: 'COMPLETED',
+    platform: 'PRIME_VIDEO',
+    title: 'Street Racing',
+    posterUrl: 'https://picsum.photos/seed/safeart-racing/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'INAPPROPRIATE_CONTENT', severity: 'LOW', message: 'Dangerous driving depicted', confidence: 0.48 }
+    ],
+    createdAt: '2026-01-25T18:28:15Z',
+    completedAt: '2026-01-25T18:28:19Z',
+    processingDurationMs: 156,
+  },
+  {
+    jobId: 'g7h8i9j0k1l2m3n4o5p6q7r8',
+    status: 'COMPLETED',
+    platform: 'NETFLIX',
+    title: 'Zombie Apocalypse',
+    posterUrl: 'https://picsum.photos/seed/safeart-zombie/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'VIOLENCE', severity: 'HIGH', message: 'Zombie gore and violence', confidence: 0.88 },
+      { code: 'INAPPROPRIATE_CONTENT', severity: 'HIGH', message: 'Graphic undead imagery', confidence: 0.79 }
+    ],
+    createdAt: '2026-01-25T18:28:16Z',
+    completedAt: '2026-01-25T18:28:22Z',
+    processingDurationMs: 267,
+  },
+  {
+    jobId: 'h8i9j0k1l2m3n4o5p6q7r8s9',
+    status: 'COMPLETED',
+    platform: 'HBO_MAX',
+    title: 'Romantic Getaway',
+    posterUrl: 'https://picsum.photos/seed/safeart-romantic/300/450',
+    isCompliant: true,
+    violations: [],
+    createdAt: '2026-01-25T18:28:17Z',
+    completedAt: '2026-01-25T18:28:21Z',
+    processingDurationMs: 104,
+  },
+  {
+    jobId: 'i9j0k1l2m3n4o5p6q7r8s9t0',
+    status: 'COMPLETED',
+    platform: 'APPLE_TV',
+    title: 'Nature Documentary',
+    posterUrl: 'https://picsum.photos/seed/safeart-nature/300/450',
+    isCompliant: true,
+    violations: [],
+    createdAt: '2026-01-25T18:28:18Z',
+    completedAt: '2026-01-25T18:28:22Z',
+    processingDurationMs: 87,
+  },
+  {
+    jobId: 'j0k1l2m3n4o5p6q7r8s9t0u1',
+    status: 'COMPLETED',
+    platform: 'NETFLIX',
+    title: 'Heist Masters',
+    posterUrl: 'https://picsum.photos/seed/safeart-heist/300/450',
+    isCompliant: false,
+    violations: [
+      { code: 'WEAPONS', severity: 'MEDIUM', message: 'Firearms in robbery scene', confidence: 0.73 }
+    ],
+    createdAt: '2026-01-25T18:28:19Z',
+    completedAt: '2026-01-25T18:28:24Z',
+    processingDurationMs: 198,
   },
 ];
 
