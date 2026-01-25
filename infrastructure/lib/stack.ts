@@ -3,6 +3,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
@@ -99,7 +100,7 @@ export class SafeartStack extends cdk.Stack {
 
     // SQS Event Source for Worker Lambda
     workerLambda.addEventSource(
-      new lambda.SqsEventSource(jobQueue, {
+      new lambdaEventSources.SqsEventSource(jobQueue, {
         batchSize: 1, // Process one job at a time
         maxBatchingWindow: cdk.Duration.seconds(5),
       })
@@ -149,7 +150,26 @@ export class SafeartStack extends cdk.Stack {
     jobsResource.addMethod('POST', new apigateway.LambdaIntegration(jobCreatorLambda));
 
     const jobResource = jobsResource.addResource('{jobId}');
-    // TODO: Add GET method when getJobHandler is implemented
+    
+    // GET /jobs/{jobId} - Get job by ID
+    const getJobLambda = new lambda.Function(this, 'GetJobLambda', {
+      functionName: `safeart-get-job-${this.node.tryGetContext('env') || 'dev'}`,
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'index.getJobHandler',
+      code: lambda.Code.fromAsset(
+        path.join(__dirname, '../../packages/backend/dist/job-creator')
+      ),
+      timeout: cdk.Duration.seconds(30),
+      memorySize: 256,
+      role: jobCreatorRole,
+      environment: {
+        TABLE_NAME: jobsTable.tableName,
+        S3_BUCKET: posterBucket.bucketName,
+        SQS_QUEUE_URL: jobQueue.queueUrl,
+      },
+    });
+    
+    jobResource.addMethod('GET', new apigateway.LambdaIntegration(getJobLambda));
 
     // EventBridge Rule for scheduled crawler execution
     const crawlerSchedule = new events.Rule(this, 'CrawlerSchedule', {

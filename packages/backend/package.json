@@ -8,7 +8,9 @@
     "test": "jest",
     "deploy": "cd ../../infrastructure && cdk deploy",
     "test:local:job-creator": "node dist/test/job-creator-test.js",
-    "test:local:worker": "node dist/test/worker-test.js"
+    "test:local:worker": "node dist/test/worker-test.js",
+    "test:e2e": "node dist/test/e2e-test.js",
+    "test:dlq": "node dist/test/dlq-test.js"
   },
   "dependencies": {
     "@safeart/shared": "*",

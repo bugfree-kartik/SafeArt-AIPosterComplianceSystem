@@ -1,8 +1,8 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, QueryCommand, GetCommand } from '@aws-sdk/lib-dynamodb';
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
-// uuid not needed for now, but keeping import for future use
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import {
   CreateJobRequest,
   CreateJobResponse,
@@ -212,3 +212,106 @@ export async function createJob(request: CreateJobRequest): Promise<CreateJobRes
   };
 }
 
+/**
+ * Get a job by ID
+ */
+export async function getJob(jobId: string): Promise<Job | null> {
+  try {
+    const result = await dynamoClient.send(
+      new GetCommand({
+        TableName: TABLE_NAME,
+        Key: { jobId },
+      })
+    );
+    return (result.Item as Job) || null;
+  } catch (error) {
+    console.error('Error getting job:', error);
+    return null;
+  }
+}
+
+/**
+ * Lambda handler for API Gateway POST /jobs
+ */
+export async function createJobHandler(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  console.log('Received event:', JSON.stringify(event, null, 2));
+
+  try {
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Request body is required' }),
+      };
+    }
+
+    const request: CreateJobRequest = JSON.parse(event.body);
+    const response = await createJob(request);
+
+    return {
+      statusCode: response.isCacheHit ? 200 : 201,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(response),
+    };
+  } catch (error) {
+    console.error('Error creating job:', error);
+    
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const statusCode = errorMessage.includes('Invalid request') ? 400 : 500;
+
+    return {
+      statusCode,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: errorMessage }),
+    };
+  }
+}
+
+/**
+ * Lambda handler for API Gateway GET /jobs/{jobId}
+ */
+export async function getJobHandler(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  console.log('Received event:', JSON.stringify(event, null, 2));
+
+  try {
+    const jobId = event.pathParameters?.jobId;
+    
+    if (!jobId) {
+      return {
+        statusCode: 400,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'jobId is required' }),
+      };
+    }
+
+    const job = await getJob(jobId);
+    
+    if (!job) {
+      return {
+        statusCode: 404,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Job not found' }),
+      };
+    }
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(job),
+    };
+  } catch (error) {
+    console.error('Error getting job:', error);
+    
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      }),
+    };
+  }
+}
