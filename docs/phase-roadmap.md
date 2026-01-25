@@ -55,23 +55,40 @@ This document outlines the implementation phases for the Safeart project.
 4. ✅ Rapid repeated requests handled consistently
 5. ✅ Cross-platform same-image handling verified
 
-## Phase 3 – Nova Act Crawler Integration
+## Phase 3 – Crawler Integration
 
-**Status**: Not Started
+**Status**: ✅ Complete
 
 ### Tasks
 
-- [ ] Clarify crawl scope and targets
-- [ ] Implement Nova Act agent
-- [ ] Connect crawler output to job creator
-- [ ] Verify end-to-end crawler → job creation → processing
+- [x] Clarify crawl scope and targets
+- [x] Implement browser automation (Puppeteer with Nova Act-ready structure)
+- [x] Connect crawler output to job creator
+- [x] Verify end-to-end crawler → job creation → processing
+- [x] Add retry logic for failed extractions
 
-### Requirements
+### Completed
 
-- Install Nova Act SDK
-- Set up browser automation
-- Implement platform-specific extractors
-- Add retry logic for failed extractions
+1. ✅ Browser automation with Puppeteer (`packages/crawler/src/browser.ts`)
+2. ✅ Base platform extractor class (`packages/crawler/src/platforms/base.ts`)
+3. ✅ Netflix extractor (`packages/crawler/src/platforms/netflix.ts`)
+4. ✅ TMDB extractor with API support (`packages/crawler/src/platforms/tmdb.ts`)
+5. ✅ Demo extractor for testing without auth
+6. ✅ Crawler test suite (`npm run test:crawler`)
+7. ✅ Demo mode for testing: `npm run crawler:demo`
+
+### Usage
+
+```bash
+# Run crawler in demo mode (no auth required)
+npm run crawler:demo
+
+# Run with TMDB API (set TMDB_API_KEY env var)
+TMDB_API_KEY=your_key npm run crawler:run
+
+# Test crawler
+npm run test:crawler
+```
 
 ## Phase 4 – Scheduling & Continuous Operation
 
@@ -139,9 +156,9 @@ Options:
 
 ## Current Focus
 
-**Phase 3**: Nova Act Crawler Integration - Next priority to enable automatic poster discovery
+**Phase 4**: Scheduling & Continuous Operation - Automate crawler runs with EventBridge
 
 ## Blockers
 
-None currently. Ready to proceed with Phase 3 (Crawler) or Phase 4 (Scheduling).
+None currently. Ready to proceed with Phase 4 (Scheduling) or Phase 5 (Compliance Models).
 

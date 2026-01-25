@@ -2,6 +2,8 @@
   "name": "@safeart/backend",
   "version": "0.1.0",
   "description": "Backend Lambda functions and infrastructure",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
@@ -30,4 +32,3 @@
     "@types/jest": "^29.5.11"
   }
 }
-

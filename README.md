@@ -199,8 +199,8 @@ See **[Deployment Guide](docs/deployment.md)** for more details.
 - **Phase 0**: Project & Architecture Setup ✅
 - **Phase 1**: Core Pipeline Foundations ✅
 - **Phase 2**: Job Creation & Caching Logic ✅
-- **Phase 3**: Nova Act Crawler Integration ← Next
-- **Phase 4**: Scheduling & Continuous Operation
+- **Phase 3**: Crawler Integration ✅
+- **Phase 4**: Scheduling & Continuous Operation ← Next
 - **Phase 5**: Compliance Model & Policy Engine
 - **Phase 6**: Observability, Operations & Demo Polish
 

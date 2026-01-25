@@ -1,19 +1,25 @@
 {
   "name": "@safeart/crawler",
   "version": "0.1.0",
-  "description": "Nova Act crawler service for discovering posters",
+  "description": "Poster crawler service using browser automation",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
     "start": "node dist/index.js",
+    "start:demo": "USE_DEMO=true node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "test": "jest"
+    "dev:demo": "USE_DEMO=true ts-node src/index.ts",
+    "test": "jest",
+    "test:crawl": "node dist/test/crawler-test.js"
   },
   "dependencies": {
     "@safeart/shared": "*",
     "@safeart/backend": "*",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "puppeteer": "^21.6.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
@@ -23,4 +29,3 @@
     "@types/jest": "^29.5.11"
   }
 }
-
