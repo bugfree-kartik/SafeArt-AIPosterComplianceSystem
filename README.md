@@ -20,6 +20,15 @@ SafeArt is an end-to-end automated pipeline that:
 - Runs AI-driven compliance checks  
 - Monitors and stores results for downstream analytics  
 
+ Dashboard Features:
+**Feature	       Description**
+📊 Stats Bar -       Total, Compliant, Non-Compliant, Pass Rate
+🖼️ Poster Grid -	Visual cards with compliance badges
+🔍 Filters -         All / Compliant / Non-Compliant
+📋 Detail Modal -    Click poster for full info + violations
+✅ Green Badge -     Compliant posters
+❌ Red Badge -       Non-compliant with violation details
+
 It is designed as a **production-grade microservice**, capable of handling **10K+ jobs/hour**, with idempotency, retries, DLQs, and event-driven processing — ideal for compliance automation at scale.
 
 ---
