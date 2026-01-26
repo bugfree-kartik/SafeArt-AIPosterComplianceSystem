@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🎨 SafeArt  
-https://safe-art-ai-poster-compliance-syste.vercel.app/
+See it in action - https://safe-art-ai-poster-compliance-syste.vercel.app/
 ### **AI-Powered Poster Compliance System for Streaming Platforms**
 
 A fully serverless, cloud-native system that **discovers**, **analyzes**, and **monitors** poster compliance across streaming platforms using AI and automated crawling.
